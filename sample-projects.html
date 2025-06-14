@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <title>Drop Your Pen | Sample Projects</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-8">
+
+  <h1 class="text-4xl font-bold mb-8 text-center text-blue-700">Sample Projects</h1>
+
+  <div class="max-w-5xl mx-auto space-y-10">
+
+    <!-- Topic 1 -->
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-semibold mb-4">College Culture Event Page</h2>
+
+      <div class="flex space-x-4 mb-4">
+        <button class="tab-btn bg-blue-600 text-white px-4 py-1 rounded" data-topic="topic1" data-lang="html">HTML</button>
+        <button class="tab-btn bg-gray-300 text-gray-700 px-4 py-1 rounded" data-topic="topic1" data-lang="css">CSS</button>
+        <button class="tab-btn bg-gray-300 text-gray-700 px-4 py-1 rounded" data-topic="topic1" data-lang="js">JS</button>
+      </div>
+
+      <pre id="topic1-html" class="code-block bg-gray-900 text-green-300 p-4 rounded text-sm overflow-auto" tabindex="0">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;title&gt;College Culture Event&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Welcome to the Annual College Culture Fest!&lt;/h1&gt;
+  &lt;p&gt;Join us for music, dance, and fun!&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <pre id="topic1-css" class="code-block hidden bg-gray-900 text-green-300 p-4 rounded text-sm overflow-auto" tabindex="0">body {
+  font-family: Arial, sans-serif;
+  background-color: #f9fafb;
+  color: #333;
+  padding: 20px;
+}
+h1 {
+  color: #2563eb;
+}
+      </pre>
+
+      <pre id="topic1-js" class="code-block hidden bg-gray-900 text-green-300 p-4 rounded text-sm overflow-auto" tabindex="0">console.log("Welcome to the Culture Fest!");
+      </pre>
+
+      <button class="copy-btn mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Copy</button>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-semibold mb-4">College Event Registration Form</h2>
+
+      <div class="flex space-x-4 mb-4">
+        <button class="tab-btn bg-blue-600 text-white px-4 py-1 rounded" data-topic="topic2" data-lang="html">HTML</button>
+        <button class="tab-btn bg-gray-300 text-gray-700 px-4 py-1 rounded" data-topic="topic2" data-lang="css">CSS</button>
+        <button class="tab-btn bg-gray-300 text-gray-700 px-4 py-1 rounded" data-topic="topic2" data-lang="js">JS</button>
+      </div>
+
+      <pre id="topic2-html" class="code-block bg-gray-900 text-green-300 p-4 rounded text-sm overflow-auto" tabindex="0">&lt;form id="regForm"&gt;
+  &lt;label for="name"&gt;Name:&lt;/label&gt;
+  &lt;input type="text" id="name" name="name" required /&gt;
+  &lt;button type="submit"&gt;Register&lt;/button&gt;
+&lt;/form&gt;
+      </pre>
+
+      <pre id="topic2-css" class="code-block hidden bg-gray-900 text-green-300 p-4 rounded text-sm overflow-auto" tabindex="0">form {
+  max-width: 400px;
+  margin: auto;
+}
+input, button {
+  padding: 8px;
+  margin-top: 8px;
+}
+button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+      </pre>
+
+      <pre id="topic2-js" class="code-block hidden bg-gray-900 text-green-300 p-4 rounded text-sm overflow-auto" tabindex="0">document.getElementById('regForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  alert('Thank you for registering, ' + this.name.value + '!');
+});
+      </pre>
+
+      <button class="copy-btn mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Copy</button>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-semibold mb-4">Event Countdown Timer</h2>
+
+      <div class="flex space-x-4 mb-4">
+        <button class="tab-btn bg-blue-600 text-white px-4 py-1 rounded" data-topic="topic3" data-lang="html">HTML</button>
+        <button class="tab-btn bg-gray-300 text-gray-700 px-4 py-1 rounded" data-topic="topic3" data-lang="css">CSS</button>
+        <button class="tab-btn bg-gray-300 text-gray-700 px-4 py-1 rounded" data-topic="topic3" data-lang="js">JS</button>
+      </div>
+
+      <pre id="topic3-html" class="code-block bg-gray-900 text-green-300 p-4 rounded text-sm overflow-auto" tabindex="0">&lt;div id="countdown"&gt;Loading countdown...&lt;/div&gt;
+      </pre>
+
+      <pre id="topic3-css" class="code-block hidden bg-gray-900 text-green-300 p-4 rounded text-sm overflow-auto" tabindex="0">#countdown {
+  font-size: 2rem;
+  color: #dc2626;
+  font-weight: bold;
+}
+      </pre>
+
+      <pre id="topic3-js" class="code-block hidden bg-gray-900 text-green-300 p-4 rounded text-sm overflow-auto" tabindex="0">const eventDate = new Date("2025-12-31T23:59:59").getTime();
+const countdownElem = document.getElementById("countdown");
+
+function updateCountdown() {
+  const now = Date.now();
+  const diff = eventDate - now;
+  if (diff <= 0) {
+    countdownElem.textContent = "Event Started!";
+    clearInterval(interval);
+    return;
+  }
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+  countdownElem.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+
+const interval = setInterval(updateCountdown, 1000);
+updateCountdown();
+      </pre>
+
+      <button class="copy-btn mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Copy</button>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-semibold mb-4">Simple To-Do List</h2>
+
+      <div class="flex space-x-4 mb-4">
+        <button class="tab-btn bg-blue-600 text-white px-4 py-1 rounded" data-topic="topic4" data-lang="html">HTML</button>
+        <button class="tab-btn bg-gray-300 text-gray-700 px-4 py-1 rounded" data-topic="topic4" data-lang="css">CSS</button>
+        <button class="tab-btn bg-gray-300 text-gray-700 px-4 py-1 rounded" data-topic="topic4" data-lang="js">JS</button>
+      </div>
+
+      <pre id="topic4-html" class="code-block bg-gray-900 text-green-300 p-4 rounded text-sm overflow-auto" tabindex="0">&lt;input type="text" id="todoInput" placeholder="Add a task..." /&gt;
+&lt;button id="addBtn"&gt;Add&lt;/button&gt;
+&lt;ul id="todoList"&gt;&lt;/ul&gt;
+      </pre>
+
+      <pre id="topic4-css" class="code-block hidden bg-gray-900 text-green-300 p-4 rounded text-sm overflow-auto" tabindex="0">#todoList {
+  list-style-type: none;
+  padding: 0;
+}
+#todoList li {
+  padding: 8px;
+  background-color: #e0e7ff;
+  margin-bottom: 6px;
+  border-radius: 4px;
+}
+button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  margin-left: 6px;
+  border-radius: 4px;
+}
+      </pre>
+
+      <pre id="topic4-js" class="code-block hidden bg-gray-900 text-green-300 p-4 rounded text-sm overflow-auto" tabindex="0">document.getElementById('addBtn').addEventListener('click', () => {
+  const input = document.getElementById('todoInput');
+  if(input.value.trim() === '') return;
+  const li = document.createElement('li');
+  li.textContent = input.value;
+  document.getElementById('todoList').appendChild(li);
+  input.value = '';
+});
+      </pre>
+
+      <button class="copy-btn mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Copy</button>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-semibold mb-4">Simple Modal Popup</h2>
+
+      <div class="flex space-x-4 mb-4">
+        <button class="tab-btn bg-blue-600 text-white px-4 py-1 rounded" data-topic="topic5" data-lang="html">HTML</button>
+        <button class="tab-btn bg-gray-300 text-gray-700 px-4 py-1 rounded" data-topic="topic5" data-lang="css">CSS</button>
+        <button class="tab-btn bg-gray-300 text-gray-700 px-4 py-1 rounded" data-topic="topic5" data-lang="js">JS</button>
+      </div>
+
+      <pre id="topic5-html" class="code-block bg-gray-900 text-green-300 p-4 rounded text-sm overflow-auto" tabindex="0">&lt;button id="openModal"&gt;Open Modal&lt;/button&gt;
+
+&lt;div id="modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"&gt;
+  &lt;div class="bg-white p-6 rounded-lg shadow-lg"&gt;
+    &lt;p&gt;This is a simple modal popup!&lt;/p&gt;
+    &lt;button id="closeModal"&gt;Close&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+      </pre>
+
+      <pre id="topic5-css" class="code-block hidden bg-gray-900 text-green-300 p-4 rounded text-sm overflow-auto" tabindex="0">#modal {
+  z-index: 50;
+}
+button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+      </pre>
+
+      <pre id="topic5-js" class="code-block hidden bg-gray-900 text-green-300 p-4 rounded text-sm overflow-auto" tabindex="0">const openBtn = document.getElementById('openModal');
+const closeBtn = document.getElementById('closeModal');
+const modal = document.getElementById('modal');
+
+openBtn.addEventListener('click', () => {
+  modal.classList.remove('hidden');
+});
+
+closeBtn.addEventListener('click', () => {
+  modal.classList.add('hidden');
+});
+      </pre>
+
+      <button class="copy-btn mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Copy</button>
+    </div>
+
+  </div>
+
+  <script>
+    // Tab switching
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const topic = btn.getAttribute("data-topic");
+        const lang = btn.getAttribute("data-lang");
+
+        // Disable all tabs for the topic and hide all code blocks
+        document.querySelectorAll(`.tab-btn[data-topic="${topic}"]`).forEach(b => {
+          b.classList.remove("bg-blue-600", "text-white");
+          b.classList.add("bg-gray-300", "text-gray-700");
+        });
+        btn.classList.add("bg-blue-600", "text-white");
+        btn.classList.remove("bg-gray-300", "text-gray-700");
+
+        // Hide all code blocks for the topic
+        document.querySelectorAll(`#${topic}-html, #${topic}-css, #${topic}-js`).forEach(block => {
+          block.classList.add("hidden");
+        });
+        // Show selected code block
+        document.getElementById(`${topic}-${lang}`).classList.remove("hidden");
+      });
+    });
+
+    // Copy button functionality
+    document.querySelectorAll(".copy-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        const container = button.closest("div.bg-white");
+        if (!container) return;
+
+        const visibleBlock = container.querySelector("pre.code-block:not(.hidden)");
+        if (!visibleBlock) return;
+
+        const codeText = visibleBlock.textContent.trim();
+
+        navigator.clipboard.writeText(codeText).then(() => {
+          const oldText = button.textContent;
+          button.textContent = "Copied!";
+          setTimeout(() => (button.textContent = oldText), 1500);
+        }).catch(() => {
+          alert("Failed to copy.");
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

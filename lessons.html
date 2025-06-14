@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Drop Your Pen | Lessons</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Smooth accordion animation */
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .accordion-content.open {
+      max-height: 2000px; /* large max height for smooth open */
+    }
+    /* Box hover effect */
+    .lesson-box:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      transform: translateY(-4px);
+      transition: transform 0.3s ease;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-8 font-sans">
+
+  <header class="max-w-6xl mx-auto mb-12 text-center">
+    <h1 class="text-5xl font-bold text-blue-700 mb-2">Learn Web Development</h1>
+    <p class="text-gray-700 text-lg max-w-3xl mx-auto">
+      Click on any box below to explore detailed lessons from basics to intermediate in HTML, CSS, and JavaScript.
+    </p>
+  </header>
+
+  <main class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+
+    <!-- Box 1: HTML -->
+    <div class="lesson-box bg-white rounded-lg p-6 shadow-md hover:bg-indigo-50 transition-colors" data-target="html-content">
+      <h2 class="text-3xl font-semibold text-indigo-700 mb-4">HTML</h2>
+      <div id="html-content" class="accordion-content text-gray-800 text-sm leading-relaxed">
+
+        <h3 class="text-xl font-semibold mb-2">1. What is HTML?</h3>
+        <p>HTML (HyperText Markup Language) standard language used to create webpages.It tells a web browsers how to display content like text,images,links, and other elementson a page. </p>
+
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">2. How HTML Works?</h3>
+        <p> You write HTML code in a text file with .html extension.A browser (like Chrome, Firefox) reads this code and shows the webpage visually.</p>
+
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">3. Common Elements and Tags</h3>
+        <ul class="list-disc ml-5 space-y-1">
+          <li><code>&lt;h1&gt;...&lt;/h1&gt;</code> to <code>&lt;h6&gt;...&lt;/h6&gt;</code> — Headings</li>
+          <li><code>&lt;p&gt;...&lt;/p&gt;</code> — Paragraphs</li>
+          <li><code>&lt;a href="#"&gt;...&lt;/a&gt;</code> — Links</li>
+          <li><code>&lt;img src="..." alt="..."&gt;</code> — Images</li>
+          <li><code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;li&gt;</code> — Lists</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">4. Attributes</h3>
+        <p>Elements can have attributes to add extra info. Examples include <code>href</code> for links, <code>src</code> for images, and <code>class</code> or <code>id</code> for styling.</p>
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">5. Semantic HTML</h3>
+        <p>Use semantic tags like <code>&lt;header&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;nav&gt;</code>, and <code>&lt;footer&gt;</code> to improve accessibility and SEO.</p>
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">6. Forms and Input Elements</h3>
+        <p>Forms collect user data using elements like <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, and <code>&lt;select&gt;</code>. Each input has different types like text, password, checkbox, and radio.</p>
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">7. Media Elements</h3>
+        <p>Embed videos with <code>&lt;video&gt;</code> and audio with <code>&lt;audio&gt;</code> tags, supporting various file formats and controls.</p>
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">8. HTML5 New Features</h3>
+        <p>Includes new semantic tags, multimedia support, form enhancements, and APIs for offline storage and drag-and-drop.</p>
+
+      </div>
+    </div>
+
+    <!-- Box 2: CSS -->
+    <div class="lesson-box bg-white rounded-lg p-6 shadow-md hover:bg-green-50 transition-colors" data-target="css-content">
+      <h2 class="text-3xl font-semibold text-green-700 mb-4">CSS</h2>
+      <div id="css-content" class="accordion-content text-gray-800 text-sm leading-relaxed">
+
+        <h3 class="text-xl font-semibold mb-2">1. What is CSS?</h3>
+        <p>CSS (Cascading Style Sheets) styles HTML elements by controlling their layout, colors, fonts, and responsiveness.</p>
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">2. CSS Syntax and Selectors</h3>
+        <p>CSS rules consist of selectors and declarations. Selectors target HTML elements by tag, class, id, or attributes.</p>
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">3. The Box Model</h3>
+        <p>Every element is a box with content, padding, border, and margin, affecting size and spacing.</p>
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">4. Colors, Fonts, and Text Styling</h3>
+        <p>Control colors using named colors, HEX, RGB, and HSL. Set font-family, size, weight, and alignment.</p>
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">5. Layout Techniques</h3>
+        <ul class="list-disc ml-5 space-y-1">
+          <li>Positioning: static, relative, absolute, fixed, sticky</li>
+          <li>Flexbox: flexible one-dimensional layout</li>
+          <li>Grid: powerful two-dimensional layout system</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">6. Responsive Design</h3>
+        <p>Make designs adapt to different screen sizes using media queries and flexible units like %, em, and rem.</p>
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">7. CSS Transitions and Animations</h3>
+        <p>Add smooth changes and animations to elements for better UX.</p>
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">8. Best Practices</h3>
+        <ul class="list-disc ml-5 space-y-1">
+          <li>Use external CSS files for better maintainability.</li>
+          <li>Keep styles modular and reusable.</li>
+          <li>Use meaningful class names and avoid inline styles.</li>
+          <li>Test across browsers and devices.</li>
+        </ul>
+
+      </div>
+    </div>
+
+    <!-- Box 3: JavaScript -->
+    <div class="lesson-box bg-white rounded-lg p-6 shadow-md hover:bg-yellow-50 transition-colors" data-target="js-content">
+      <h2 class="text-3xl font-semibold text-yellow-700 mb-4">JavaScript</h2>
+      <div id="js-content" class="accordion-content text-gray-800 text-sm leading-relaxed">
+
+        <h3 class="text-xl font-semibold mb-2">1. What is JavaScript?</h3>
+        <p>JavaScript is the scripting language that adds interactivity to websites, allowing dynamic content updates and user interactions.</p>
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">2. Variables and Data Types</h3>
+        <p>Store data in variables declared with <code>let</code>, <code>const</code>, or <code>var</code>. Common types include string, number, boolean, array, and object.</p>
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">3. Functions</h3>
+        <p>Functions are reusable blocks of code that perform tasks, defined with the <code>function</code> keyword or arrow syntax.</p>
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">4. Control Structures</h3>
+        <p>Control code flow with <code>if</code>, <code>else if</code>, <code>else</code>, <code>switch</code>, and loops like <code>for</code>, <code>while</code>.</p>
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">5. DOM Manipulation</h3>
+        <p>Interact with webpage elements using Document Object Model (DOM) methods like <code>getElementById</code>, <code>querySelector</code>, and add event listeners.</p>
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">6. Events</h3>
+        <p>Respond to user actions like clicks, form submissions, and key presses to make pages interactive.</p>
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">7. Objects and Arrays</h3>
+        <p>Store collections of data with arrays and organize data with objects containing properties and methods.</p>
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">8. ES6+ Features</h3>
+        <p>Learn modern JavaScript features like template literals, destructuring, spread operator, arrow functions, and promises.</p>
+
+        <h3 class="text-xl font-semibold mt-4 mb-2">9. Best Practices</h3>
+        <ul class="list-disc ml-5 space-y-1">
+          <li>Write clear and maintainable code with comments.</li>
+          <li>Use consistent naming conventions.</li>
+          <li>Test code frequently in browsers.</li>
+          <li>Keep functions small and modular.</li>
+        </ul>
+
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // Accordion toggle logic
+    document.querySelectorAll('.lesson-box').forEach(box => {
+      box.addEventListener('click', () => {
+        const targetId = box.getAttribute('data-target');
+        const content = document.getElementById(targetId);
+
+        // Close all contents except this one
+        document.querySelectorAll('.accordion-content').forEach(c => {
+          if (c !== content) {
+            c.classList.remove('open');
+          }
+        });
+
+        // Toggle this content
+        content.classList.toggle('open');
+      });
+    });
+  </script>
+
+</body>
+</html>

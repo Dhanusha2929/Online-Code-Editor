@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Drop Your Pen 🖊️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column !important;
+        gap: 1rem !important;
+        align-items: flex-start;
+      }
+      .feature-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+    @media (max-width: 480px) {
+      h1, h2 {
+        font-size: 1.7rem !important;
+      }
+      .modal-content {
+        width: 95vw !important;
+        max-width: 360px !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow p-4 flex flex-wrap justify-between items-center">
+    <div class="text-2xl font-bold text-blue-600 flex-shrink-0 mb-2 sm:mb-0">Drop Your Pen 🖊️</div>
+    <ul class="flex gap-6 text-gray-700 font-medium flex-wrap">
+      <li><a href="{{ url_for('welcome') }}" class="hover:text-blue-500">Welcome</a></li>
+      <li><a href="{{ url_for('coding') }}" class="hover:text-blue-500">Coding</a></li>
+      <li><a href="{{ url_for('samples') }}" class="hover:text-blue-500">Sample</a></li>
+      <li><a href="{{ url_for('lessons') }}" class="hover:text-blue-500">Lessons</a></li>
+      <li><button onclick="toggleModal('login')" class="hover:text-blue-500">Login</button></li>
+      <li><button onclick="toggleModal('signup')" class="hover:text-blue-500">Sign Up</button></li>
+    </ul>
+  </nav>
+
+  <!-- Welcome Section -->
+  <section class="text-center py-16 px-2 sm:py-20 sm:px-4 bg-gradient-to-r from-blue-100 to-purple-100">
+    <h1 class="text-3xl sm:text-5xl md:text-6xl font-bold text-gray-800 mb-6 leading-tight">Welcome to Drop Your Pen 🖊️</h1>
+    <p class="text-base sm:text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">
+      Discover a fun and interactive way to learn HTML, CSS, and JavaScript.
+      Practice live coding, explore samples, and grow your front-end skills here!
+    </p>
+  </section>
+
+  <!-- Feature Section -->
+  <section class="py-10 sm:py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-3 sm:px-6 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">What You Can Do Here</h2>
+      <div class="grid feature-grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        <div class="p-6 bg-blue-50 rounded-lg shadow hover:shadow-md transition">
+          <div class="text-3xl sm:text-4xl mb-4">💡</div>
+          <h3 class="text-lg sm:text-xl font-semibold mb-2">Learn to Code</h3>
+          <p class="text-gray-600 text-sm sm:text-base">Practice HTML, CSS, and JavaScript with live previews.</p>
+        </div>
+        <div class="p-6 bg-green-50 rounded-lg shadow hover:shadow-md transition">
+          <div class="text-3xl sm:text-4xl mb-4">🛠️</div>
+          <h3 class="text-lg sm:text-xl font-semibold mb-2">Build Projects</h3>
+          <p class="text-gray-600 text-sm sm:text-base">Create your own mini-projects and experiment safely.</p>
+        </div>
+        <div class="p-6 bg-purple-50 rounded-lg shadow hover:shadow-md transition">
+          <div class="text-3xl sm:text-4xl mb-4">📚</div>
+          <h3 class="text-lg sm:text-xl font-semibold mb-2">Explore Lessons</h3>
+          <p class="text-gray-600 text-sm sm:text-base">Follow step-by-step lessons to grow your skills quickly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white text-center py-6 mt-10">
+    <p class="text-sm">© 2025 Drop Your Pen. All rights reserved.</p>
+    <p class="text-xs mt-2">Created with 💙 by Dhanusha and Mallishwari</p>
+  </footer>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+    <div class="bg-white modal-content p-6 rounded-lg w-full max-w-xs sm:max-w-sm shadow-lg">
+      <h2 class="text-2xl font-semibold mb-4 text-center">Login</h2>
+      <form>
+        <input type="email" placeholder="Email" class="w-full p-2 mb-3 border rounded" required />
+        <input type="password" placeholder="Password" class="w-full p-2 mb-4 border rounded" required />
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Submit</button>
+      </form>
+      <button onclick="toggleModal('login')" class="mt-3 text-sm text-gray-500 hover:underline block text-center">Close</button>
+    </div>
+  </div>
+
+  <!-- Signup Modal -->
+  <div id="signupModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+    <div class="bg-white modal-content p-6 rounded-lg w-full max-w-sm shadow-lg">
+      <h2 class="text-2xl font-semibold mb-4 text-center">Sign Up</h2>
+      <form action="/signup" method="POST">
+        <input type="text" name="firstname" placeholder="First Name" class="w-full p-2 mb-3 border rounded" required />
+        <input type="text" name="lastname" placeholder="Last Name" class="w-full p-2 mb-3 border rounded" required />
+        <input type="email" name="email" placeholder="Email" class="w-full p-2 mb-3 border rounded" required />
+        <input type="password" name="password" placeholder="Password" class="w-full p-2 mb-4 border rounded" required />
+        <button type="submit" class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700">Submit</button>
+      </form>
+      <button onclick="toggleModal('signup')" class="mt-3 text-sm text-gray-500 hover:underline block text-center">Close</button>
+    </div>
+  </div>
+
+  <!-- Script to toggle modals -->
+  <script>
+    function toggleModal(type) {
+      const loginModal = document.getElementById("loginModal");
+      const signupModal = document.getElementById("signupModal");
+      if (type === "login") {
+        loginModal.classList.toggle("hidden");
+      } else if (type === "signup") {
+        signupModal.classList.toggle("hidden");
+      }
+    }
+  </script>
+
+</body>
+</html>
