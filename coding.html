@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drop Your Pen</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- CodeMirror CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
+  <style>
+    .CodeMirror {
+      height: 160px !important;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      padding: 0.75rem;
+      border: 1px solid #e5e7eb;
+      background: white;
+    }
+    .dark .CodeMirror {
+      background: #22272e !important;
+      color: #f8f8f2 !important;
+      border-color: #374151 !important;
+    }
+    .cm-s-material-darker .CodeMirror-gutters {
+      background: #22272e !important;
+      border-right: 1px solid #374151 !important;
+    }
+    .syntax-error {
+      background: #ffeaea !important;
+      color: #b91c1c !important;
+    }
+    .dark .syntax-error {
+      background: #450a0a !important;
+      color: #fca5a5 !important;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800 min-h-screen flex items-center justify-center p-4">
+
+  <div class="container mx-auto bg-white shadow-2xl rounded-xl p-6 w-full max-w-7xl">
+    <h1 class="text-3xl font-bold text-center mb-6 text-indigo-600">Drop Your Pen 🖊️</h1>
+    <div class="grid md:grid-cols-2 gap-6">
+      <!-- Left Panel -->
+      <div class="space-y-4">
+        <div>
+          <label class="block font-semibold mb-1 text-indigo-700">HTML</label>
+          <textarea id="html-code" class="hidden"></textarea>
+          <div id="html-editor"></div>
+        </div>
+        <div>
+          <label class="block font-semibold mb-1 text-green-700">CSS</label>
+          <textarea id="css-code" class="hidden"></textarea>
+          <div id="css-editor"></div>
+        </div>
+        <div>
+          <label class="block font-semibold mb-1 text-yellow-600">JavaScript</label>
+          <textarea id="js-code" class="hidden"></textarea>
+          <div id="js-editor"></div>
+          <div id="js-error" class="text-red-600 text-xs mt-1"></div>
+        </div>
+      </div>
+      <!-- Right Panel -->
+      <div class="flex flex-col">
+        <!-- Buttons -->
+        <div class="flex flex-wrap gap-2 mb-2 justify-center md:justify-start">
+          <button onclick="run()" class="flex items-center gap-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow text-sm">
+            <span>▶</span> Run
+          </button>
+          <button onclick="preview()" class="flex items-center gap-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow text-sm">
+            <span>👁️</span> Preview
+          </button>
+          <button onclick="downloadCode()" class="flex items-center gap-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow text-sm">
+            <span>⬇️</span> Download
+          </button>
+          <button onclick="toggleDarkMode()" id="darkModeBtn" class="flex items-center gap-1 bg-gray-800 hover:bg-black text-white font-semibold py-2 px-4 rounded-lg shadow text-sm">
+            <span>🌙</span> Dark Mode
+          </button>
+        </div>
+        <label class="block font-semibold mb-2 text-blue-700">Output</label>
+        <iframe id="output" class="flex-1 border-2 border-dashed border-blue-300 rounded-lg w-full min-h-[550px] bg-white"></iframe>
+      </div>
+    </div>
+  </div>
+  <!-- CodeMirror and JS libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/lint/lint.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/lint/lint.min.css">
+  <!-- JSZip for download -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <!-- JSHint for JS Linting -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jshint/2.13.6/jshint.min.js"></script>
+  <script>
+    // Initialize CodeMirror editors
+    let htmlEditor, cssEditor, jsEditor;
+    let darkMode = false;
+
+    function updateTextareaFromEditors() {
+      document.getElementById('html-code').value = htmlEditor.getValue();
+      document.getElementById('css-code').value = cssEditor.getValue();
+      document.getElementById('js-code').value = jsEditor.getValue();
+    }
+
+    function highlightJsSyntaxErrors() {
+      const jsCode = jsEditor.getValue();
+      const errorDiv = document.getElementById('js-error');
+      jsEditor.getAllMarks().forEach(mark => mark.clear());
+      errorDiv.textContent = '';
+      window.JSHINT(jsCode);
+      const errors = JSHINT.errors || [];
+      if (errors.length > 0) {
+        errors.forEach(err => {
+          if (!err) return;
+          const line = err.line ? err.line - 1 : 0;
+          if (line >= 0) {
+            jsEditor.doc.addLineClass(line, 'background', 'syntax-error');
+          }
+        });
+        errorDiv.textContent = 'JS Syntax Error: ' + errors[0].reason + ' (line ' + errors[0].line + ')';
+      } else {
+        for(let i=0; i<jsEditor.lineCount(); i++) {
+          jsEditor.doc.removeLineClass(i, 'background', 'syntax-error');
+        }
+      }
+    }
+
+    window.onload = function() {
+      htmlEditor = CodeMirror(document.getElementById('html-editor'), {
+        mode: 'htmlmixed',
+        theme: 'default',
+        lineNumbers: false,
+        value: '',
+        tabSize: 2,
+        lineWrapping: true
+      });
+      cssEditor = CodeMirror(document.getElementById('css-editor'), {
+        mode: 'css',
+        theme: 'default',
+        lineNumbers: false,
+        value: '',
+        tabSize: 2,
+        lineWrapping: true
+      });
+      jsEditor = CodeMirror(document.getElementById('js-editor'), {
+        mode: 'javascript',
+        theme: 'default',
+        lineNumbers: false,
+        value: '',
+        tabSize: 2,
+        lineWrapping: true
+      });
+      htmlEditor.on('change', updateTextareaFromEditors);
+      cssEditor.on('change', updateTextareaFromEditors);
+      jsEditor.on('change', () => {
+        updateTextareaFromEditors();
+        highlightJsSyntaxErrors();
+      });
+      highlightJsSyntaxErrors();
+    };
+
+    function run() {
+      updateTextareaFromEditors();
+      let htmlCode = htmlEditor.getValue();
+      let cssCode = cssEditor.getValue();
+      let jsCode = jsEditor.getValue();
+      let output = document.getElementById("output");
+      output.contentDocument.body.innerHTML = htmlCode + "<style>" + cssCode + "</style>";
+      try {
+        output.contentWindow.eval(jsCode);
+        document.getElementById('js-error').textContent = "";
+      } catch (e) {
+        document.getElementById('js-error').textContent = "Runtime Error: " + e.message;
+      }
+    }
+    function preview() {
+      updateTextareaFromEditors();
+      let htmlCode = htmlEditor.getValue();
+      let cssCode = cssEditor.getValue();
+      let output = document.getElementById("output");
+      output.contentDocument.body.innerHTML = htmlCode + "<style>" + cssCode + "</style>";
+    }
+    function downloadCode() {
+      updateTextareaFromEditors();
+      const html = htmlEditor.getValue();
+      const css = cssEditor.getValue();
+      const js = jsEditor.getValue();
+
+      const zip = new JSZip();
+      zip.file("index.html", html);
+      zip.file("style.css", css);
+      zip.file("script.js", js);
+
+      zip.generateAsync({type:"blob"}).then(function(content) {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(content);
+        a.download = "your_pen.zip";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      });
+    }
+    function toggleDarkMode() {
+      darkMode = !darkMode;
+      const body = document.body;
+      const btn = document.getElementById('darkModeBtn');
+      btn.innerHTML = darkMode ? '☀️ Light Mode' : '🌙 Dark Mode';
+      document.querySelector('.container').classList.toggle('bg-white');
+      document.querySelector('.container').classList.toggle('bg-gray-900');
+      body.classList.toggle('bg-gray-100');
+      body.classList.toggle('bg-gray-950');
+      body.classList.toggle('text-gray-800');
+      body.classList.toggle('text-gray-100');
+      // CodeMirror theme
+      const theme = darkMode ? 'material-darker' : 'default';
+      htmlEditor.setOption('theme', theme);
+      cssEditor.setOption('theme', theme);
+      jsEditor.setOption('theme', theme);
+      document.querySelectorAll('.CodeMirror').forEach(el => {
+        if (darkMode) el.classList.add('dark');
+        else el.classList.remove('dark');
+      });
+    }
+  </script>
+</body>
+</html>
